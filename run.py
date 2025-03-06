@@ -1,7 +1,7 @@
 """This is a walkthrough project part of Code Institute Full Stack Dev certification"""
 import gspread
 from google.oauth2.service_account import Credentials
-from pprint import pprint
+# from pprint import pprint
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -67,7 +67,14 @@ def calculate_surplus_data(sales_row):
     print('Calculating surplus data...\n')
     stock = SHEET.worksheet('stock').get_all_values()
     stock_row = stock[-1]
-    pprint(stock_row)
+    
+    surplus_data = []
+    for stock, sales in zip(stock_row, sales_row):
+        surplus = int(stock) - sales
+        surplus_data.append(surplus)
+        
+    print(surplus_data)
+        
     
 
 def main():
